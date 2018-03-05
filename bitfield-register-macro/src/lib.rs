@@ -161,7 +161,7 @@ fn output_struct(name: &Ident, bitfields: &Vec<BitField>) -> quote::Tokens {
     let mut impl_body = quote! {};
 
     for bitfield in bitfields {
-        println!("iter field {} @{:?}", bitfield.ident, bitfield.position);
+        //println!("iter field {} @{:?}", bitfield.ident, bitfield.position);
 
         let getter_str = format!("get_{}", bitfield.ident.as_ref());
         let getter: Ident = From::from(getter_str.as_str());
@@ -199,8 +199,8 @@ fn output_struct(name: &Ident, bitfields: &Vec<BitField>) -> quote::Tokens {
             };
         }
 
-        println!("getter body {}", getter_body);
-        println!("setter body {}", setter_body);
+        //println!("getter body {}", getter_body);
+        //println!("setter body {}", setter_body);
 
         impl_body = quote! {
             #impl_body
@@ -324,7 +324,7 @@ pub fn register(_: TokenStream, input: TokenStream) -> TokenStream {
     let s = input.to_string();
     let ast = parse_derive_input(&s).unwrap();
 
-    println!("{}", s);
+    //println!("{}", s);
 
     let fields = match ast.body {
         Body::Enum(_) => panic!("enum not supported"),

@@ -14,6 +14,19 @@ pub trait IntoBitfield<Array> {
     fn into_bitfield(self) -> Array;
 }
 
+impl FromBitfield<[u8;2]> for u16 {
+    fn from_bitfield(array: [u8;2]) -> Self {
+        return (array[0] as u16) | (array[1] as u16) << 8;
+    }
+}
+
+impl IntoBitfield<[u8;2]> for u16 {
+    fn into_bitfield(self) -> [u8;2]{
+        return [(self & 0xFF) as u8, ((self >> 8) & 0xFF) as u8];
+    }
+}
+
+
 impl FromBitfield<[u8;1]> for u8 {
     fn from_bitfield(array: [u8;1]) -> Self {
         return array[0];
